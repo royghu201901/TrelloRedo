@@ -444,8 +444,11 @@ const CardContentMain = (props: CardContextMainProps) => {
             >
               Save
             </Button>
-            <IconButton className={classes.inputCloseBtn}>
-              <CloseIcon onClick={() => setDescInputVisible(false)}/>
+            <IconButton
+              className={classes.inputCloseBtn}
+              onClick={() => setDescInputVisible(false)}
+            >
+              <CloseIcon/>
             </IconButton>
           </>
         }

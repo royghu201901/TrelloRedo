@@ -179,10 +179,10 @@ export default function PrimarySearchAppBar() {
     <Menu
       className={classes.renderMenu}
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      // anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} // 和 anchorEl={anchorEl} 只需要留一个
       id={menuId}
       keepMounted
-      transformOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      // transformOrigin={{ vertical: 'bottom', horizontal: 'right' }} // 和 anchorEl={anchorEl} 只需要留一个
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
