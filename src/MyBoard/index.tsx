@@ -9,7 +9,7 @@ import {
   DragUpdate,
 } from 'react-beautiful-dnd'
 import update from 'immutability-helper'
-import { fade, createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import { alpha, createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import MyCard from './components/MyCard'
 import CardModalContext from './components/CardModalContext'
 import Button from '@material-ui/core/Button'
@@ -20,18 +20,27 @@ import Tooltip from '@material-ui/core/Tooltip'
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined'
 import PermMediaOutlinedIcon from '@material-ui/icons/PermMediaOutlined'
 
+import 'overlayscrollbars/css/OverlayScrollbars.css'
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react'
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    myBoard: {
+      width: '100%',
+      height: window.innerWidth >= 1440 ? '100%' : '568px',
+    },
     container: {
-      height: '80%',
+      width: window.innerWidth >= 1440 ? '100%' : (InitialData.length > 3 ? '120%' : '100%'),
       overflowX: 'auto',
       overflowY: 'hidden',
+      display: 'flex',
+      alignItems: 'flex-start',
     },
     column: {
       display: 'inline-block',
       verticalAlign: 'top',
       width: '292px',
-      maxHeight: '80%',
+      maxHeight: '95%',
       margin: '0 4px',
       backgroundColor: '#ebecf0',
       borderRadius: '3px',
@@ -103,11 +112,15 @@ const useStyles = makeStyles((theme: Theme) =>
       width: '264px',
       marginLeft: theme.spacing(1),
       justifyContent: 'flex-start',
-      backgroundColor: fade(theme.palette.common.black, 0.1),
+      backgroundColor: alpha(theme.palette.common.black, 0.1),
       '&:hover': {
-        backgroundColor: fade(theme.palette.common.black, 0.15),
+        backgroundColor: alpha(theme.palette.common.black, 0.15),
       },
       textTransform: 'none',
+    },
+    scrollbarContainer: {
+      height: '100%',
+      maxWidth: '120%',
     },
   })
 )
@@ -333,29 +346,33 @@ const MyBoard = () => {
   }
 
   return (
-    <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-      <div className={classes.container}>
-        {data.map((column, index) => {
-          return (
-            <Column
-              columnIndex={index}
-              key={column.id}
-              activeColumn={activeColumn}
-              column={column}
-            />
-          )
-        })}
-        <Button
-          className={classes.addListBtn}
-        >
-          <AddOutlinedIcon
-            fontSize="inherit"
-            className={classes.addCardIcon}
-          />
-          Add another list
-        </Button>
-      </div>
-    </DragDropContext>
+    <div className={classes.myBoard}>
+      <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+        <OverlayScrollbarsComponent className={classes.scrollbarContainer}>
+          <div className={classes.container}>
+              {data.map((column, index) => {
+                return (
+                  <Column
+                    columnIndex={index}
+                    key={column.id}
+                    activeColumn={activeColumn}
+                    column={column}
+                  />
+                )
+              })}
+              <Button
+                className={classes.addListBtn}
+              >
+                <AddOutlinedIcon
+                  fontSize="inherit"
+                  className={classes.addCardIcon}
+                />
+                Add another list
+              </Button>
+          </div>
+        </OverlayScrollbarsComponent>
+      </DragDropContext>
+    </div>
   )
 }
 

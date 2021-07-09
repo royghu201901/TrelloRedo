@@ -1,5 +1,5 @@
 import React from 'react';
-import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { alpha, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -23,17 +23,18 @@ import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    grow: {
+    myNav: {
       flexGrow: 1,
+      height: theme.spacing(6),
     },
     menuButton: {
       marginRight: theme.spacing(0),
       borderRadius: '3px',
-      backgroundColor: fade(theme.palette.common.white, 0.15),
+      backgroundColor: alpha(theme.palette.common.white, 0.15),
       margin: '5px',
       padding: '5px 7px',
       '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25)
+        backgroundColor: alpha(theme.palette.common.white, 0.25)
       }
     },
     title: {
@@ -45,9 +46,9 @@ const useStyles = makeStyles((theme: Theme) =>
     search: {
       position: 'relative',
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
+      backgroundColor: alpha(theme.palette.common.white, 0.15),
       '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
       },
       marginRight: theme.spacing(2),
       marginLeft: 0,
@@ -114,11 +115,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     navBtn: {
       borderRadius: '3px',
-      backgroundColor: fade(theme.palette.common.white, 0.15),
+      backgroundColor: alpha(theme.palette.common.white, 0.15),
       margin: '5px',
       padding: '5px 7px',
       '&:hover': {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
+        backgroundColor: alpha(theme.palette.common.white, 0.25),
       },
     },
     renderMenu: {
@@ -133,6 +134,9 @@ const useStyles = makeStyles((theme: Theme) =>
     divider: {
       marginTop: '10px',
       marginBottom: '10px',
+    },
+    appTitleFlex: {
+      flexGrow: 1,
     },
     appTitle: {
       opacity: '0.5',
@@ -251,8 +255,8 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    <div className={classes.grow}>
-      <AppBar position="static" color="transparent">
+    <div className={classes.myNav}>
+      <AppBar position="fixed" color="transparent" elevation={0}>
         <Toolbar variant="dense" className={classes.transparentDark}>
           <IconButton
             edge="start"
@@ -278,7 +282,7 @@ export default function PrimarySearchAppBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <div className={classes.grow}>
+          <div className={classes.appTitleFlex}>
             <div className={classes.appTitle}>
               Gang Hu's Todo List
             </div>

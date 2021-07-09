@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fade, createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { alpha, createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -19,27 +19,31 @@ import GroupIcon from '@material-ui/icons/Group';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
+    myToolbar: {
       flexGrow: 1,
+      height: theme.spacing(6),
+    },
+    root: {
+      top: 48,
     },
     toolbarButton: {
       marginRight: theme.spacing(2),
-      backgroundColor: fade(theme.palette.common.black, 0.1),
+      backgroundColor: alpha(theme.palette.common.black, 0.1),
       '&:hover': {
-        backgroundColor: fade(theme.palette.common.black, 0.15),
+        backgroundColor: alpha(theme.palette.common.black, 0.15),
       },
       textTransform: 'none'
     },
     toolbarRightButton: {
       marginRight: theme.spacing(0),
-      backgroundColor: fade(theme.palette.common.black, 0.1),
+      backgroundColor: alpha(theme.palette.common.black, 0.1),
       '&:hover': {
-        backgroundColor: fade(theme.palette.common.black, 0.15),
+        backgroundColor: alpha(theme.palette.common.black, 0.15),
       },
       textTransform: 'none',
     },
     toolbarButtonIcon: {
-      color: fade(theme.palette.common.black, 0.5),
+      color: alpha(theme.palette.common.black, 0.5),
       marginLeft: theme.spacing(0.5),
     },
     groupBar: {
@@ -51,9 +55,9 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 600,
     },
     starBtn: {
-      backgroundColor: fade(theme.palette.common.black, 0.1),
+      backgroundColor: alpha(theme.palette.common.black, 0.1),
       '&:hover': {
-        backgroundColor: fade(theme.palette.common.black, 0.15),
+        backgroundColor: alpha(theme.palette.common.black, 0.15),
       },
       borderRadius: '3px',
       padding: '4px',
@@ -63,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: '#f2d600',
     },
     starBtnUnactive: {
-      color: fade(theme.palette.common.black, 0.5),
+      color: alpha(theme.palette.common.black, 0.5),
     },
     transparentLight: {
       color: '#172B4D',
@@ -73,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(0.75, 2, 0.75, 0),
     },
     workspaceChip: {
-      backgroundColor: fade(theme.palette.common.black, 0.1),
+      backgroundColor: alpha(theme.palette.common.black, 0.1),
       margin: theme.spacing(0, 0.5),
     },
     smallUserIcon: {
@@ -115,8 +119,8 @@ export default function ButtonAppBar() {
   const [star, setStar] = useState<boolean>(false)
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
+    <div className={classes.myToolbar}>
+      <AppBar position="fixed" color="transparent" elevation={0} className={classes.root}> 
         <Toolbar variant="dense" className={classes.transparentLight}>
           <Button
             className={classes.toolbarButton}
