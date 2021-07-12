@@ -79,7 +79,7 @@ const AccordionSummary = withStyles({
     },
     borderRadius: '4px',
   },
-  focused: {
+  focusVisible: {
     backgroundColor: '#FFF !important',
   },
   content: {

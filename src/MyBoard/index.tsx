@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     myBoard: {
       width: '100%',
-      height: window.innerWidth >= 1440 ? '100%' : '568px',
+      height: window.innerWidth >= 1440 ? 'calc(100% - 96px)' : '568px',
     },
     container: {
       width: window.innerWidth >= 1440 ? '100%' : (InitialData.length > 3 ? '129%' : '100%'),
