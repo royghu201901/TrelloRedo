@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: window.innerWidth >= 1440 ? '100%' : '568px',
     },
     container: {
-      width: window.innerWidth >= 1440 ? '100%' : (InitialData.length > 3 ? '120%' : '100%'),
+      width: window.innerWidth >= 1440 ? '100%' : (InitialData.length > 3 ? '129%' : '100%'),
       height: '100%',
       overflowX: 'auto',
       overflowY: 'hidden',
@@ -129,7 +129,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '100%',
       overflowX: 'auto',
       overflowY: 'hidden',
-      width: window.innerWidth >= 1440 ? '100%' : (InitialData.length > 3 ? '120%' : '100%'),
+      width: window.innerWidth >= 1440 ? '100%' : (InitialData.length > 3 ? '140%' : '100%'),
     },
   })
 )
@@ -161,8 +161,10 @@ interface IssueProps {
   listName: string
 }
 
+const desginImg = 'https://i.loli.net/2021/07/12/ekJcjNLaslK6TCw.png'
 const todoImg = 'https://i.loli.net/2021/06/29/JpkM7vYZOj2wmoW.png'
 const doingImg = 'https://i.loli.net/2021/06/29/vutBn4UYkOVzci1.png'
+const testImg = 'https://i.loli.net/2021/07/12/h7tJGasPAImnEk5.png'
 const doneImg = 'https://i.loli.net/2021/06/29/4Pug6FdtjraDSTC.png'
 
 const InitialData: initialDataInferface[] = [
@@ -174,41 +176,50 @@ const InitialData: initialDataInferface[] = [
       { id: 2, name: '睡觉', img: '', desc: '' },
       { id: 3, name: '打豆豆', img: '', desc: '' },
     ],
-    acceptIds: [200, 300], //? 全部可接受
+    acceptIds: [200, 300, 400, 500], //? 全部可接受
     // acceptIds: [200],
   },
   {
     id: 200,
-    name: 'Doing',
+    name: 'Design',
     issues: [
-      { id: 4, name: '删库', img: doingImg, desc: '' },
-      { id: 5, name: '跑路', img: '', desc: '' },
+      { id: 4, name: '原型设计', img: desginImg, desc: '' },
+      { id: 5, name: 'UI设计', img: '', desc: '' },
     ],
-    acceptIds: [100, 300], //? 全部可接受
-    // acceptIds: [300],
+    acceptIds: [100, 300, 400, 500], //? 全部可接受
   },
   {
     id: 300,
-    name: 'Done',
+    name: 'Doing',
     issues: [
-      { id: 6, name: '小笼包', img: doneImg, desc: '' }
+      { id: 6, name: '删库', img: doingImg, desc: '' },
+      { id: 7, name: '跑路', img: '', desc: '' },
     ],
-    acceptIds: [100, 200],
+    acceptIds: [100, 200, 400, 500], //? 全部可接受
+    // acceptIds: [300],
   },
   {
     id: 400,
+    name: 'Testing',
+    issues: [
+      { id: 8, name: '代码测试', img: testImg, desc: '' }
+    ],
+    acceptIds: [100, 200, 300, 500],
+  },
+  {
+    id: 500,
     name: 'Done',
     issues: [
-      { id: 6, name: '小笼包', img: doneImg, desc: '' }
+      { id: 9, name: '完结撒花', img: doneImg, desc: '' }
     ],
-    acceptIds: [100, 200],
+    acceptIds: [100, 200, 300, 400],
   },
 ]
 
 const initialDesc = `This is a list of things that are good to pull off to work on, prioritized.
 If there are too few items here, we should swarm against getting tasks ready for work.`
 
-for (let i = 7; i < 10; i++) {
+for (let i = 10; i < 13; i++) {
   InitialData[0].issues.push({ id: i, name: `任务${i}`, img: '', desc: initialDesc })
 }
 
