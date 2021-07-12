@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {
   DragDropContext,
   Droppable,
@@ -23,6 +23,8 @@ import PermMediaOutlinedIcon from '@material-ui/icons/PermMediaOutlined'
 import 'overlayscrollbars/css/OverlayScrollbars.css'
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react'
 
+import ScrollContainer from 'react-indiana-drag-scroll'
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     myBoard: {
@@ -31,6 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     container: {
       width: window.innerWidth >= 1440 ? '100%' : (InitialData.length > 3 ? '120%' : '100%'),
+      height: '100%',
       overflowX: 'auto',
       overflowY: 'hidden',
       display: 'flex',
@@ -118,9 +121,15 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       textTransform: 'none',
     },
+    scrollbar: {
+      height: '100%',
+      maxWidth: '100%',
+    },
     scrollbarContainer: {
       height: '100%',
-      maxWidth: '120%',
+      overflowX: 'auto',
+      overflowY: 'hidden',
+      width: window.innerWidth >= 1440 ? '100%' : (InitialData.length > 3 ? '120%' : '100%'),
     },
   })
 )
@@ -180,6 +189,14 @@ const InitialData: initialDataInferface[] = [
   },
   {
     id: 300,
+    name: 'Done',
+    issues: [
+      { id: 6, name: '小笼包', img: doneImg, desc: '' }
+    ],
+    acceptIds: [100, 200],
+  },
+  {
+    id: 400,
     name: 'Done',
     issues: [
       { id: 6, name: '小笼包', img: doneImg, desc: '' }
@@ -345,31 +362,47 @@ const MyBoard = () => {
     setActiveColumn(null)
   }
 
+  const scrollbarContainer:any = useRef(null);
+
+  useEffect(() => {
+    if (scrollbarContainer.current) {
+      scrollbarContainer.current.scrollTo(0, Math.random() * 5000)
+      // console.log(scrollbarContainer.current)
+    }
+  }, []);
+
   return (
     <div className={classes.myBoard}>
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-        <OverlayScrollbarsComponent className={classes.scrollbarContainer}>
-          <div className={classes.container}>
-              {data.map((column, index) => {
-                return (
-                  <Column
-                    columnIndex={index}
-                    key={column.id}
-                    activeColumn={activeColumn}
-                    column={column}
+        <OverlayScrollbarsComponent className={classes.scrollbar}>
+          <ScrollContainer
+            innerRef={scrollbarContainer}
+            // 忽略的元素ignoreElements必须跟字符串，为类名，但是前面必须加一个'.'
+            ignoreElements={'.' + classes.column}
+            className={classes.scrollbarContainer}
+          >
+              <div className={classes.container}>
+                {data.map((column, index) => {
+                  return (
+                    <Column
+                      columnIndex={index}
+                      key={column.id}
+                      activeColumn={activeColumn}
+                      column={column}
+                    />
+                  )
+                })}
+                <Button
+                  className={classes.addListBtn}
+                >
+                  <AddOutlinedIcon
+                    fontSize="inherit"
+                    className={classes.addCardIcon}
                   />
-                )
-              })}
-              <Button
-                className={classes.addListBtn}
-              >
-                <AddOutlinedIcon
-                  fontSize="inherit"
-                  className={classes.addCardIcon}
-                />
-                Add another list
-              </Button>
-          </div>
+                  Add another list
+                </Button>
+              </div>
+          </ScrollContainer>
         </OverlayScrollbarsComponent>
       </DragDropContext>
     </div>
