@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'inline-block',
       verticalAlign: 'top',
       width: '292px',
-      maxHeight: '95%',
+      maxHeight: '97%',
       margin: '0 4px',
       backgroundColor: '#ebecf0',
       borderRadius: '3px',
