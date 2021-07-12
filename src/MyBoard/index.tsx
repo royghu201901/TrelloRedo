@@ -367,7 +367,6 @@ const MyBoard = () => {
   useEffect(() => {
     if (scrollbarContainer.current) {
       scrollbarContainer.current.scrollTo(0, Math.random() * 5000)
-      // console.log(scrollbarContainer.current)
     }
   }, []);
 
@@ -378,6 +377,7 @@ const MyBoard = () => {
           <ScrollContainer
             innerRef={scrollbarContainer}
             // 忽略的元素ignoreElements必须跟字符串，为类名，但是前面必须加一个'.'
+            // for example, ".modal, dialog" or "*[prevent-drag-scroll]"
             ignoreElements={'.' + classes.column}
             className={classes.scrollbarContainer}
           >
